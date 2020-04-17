@@ -1,2 +1,3 @@
 # Yahtzee
-Comand line Yahtzee like game
+
+Command line Yahtzee like game.
