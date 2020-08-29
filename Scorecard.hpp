@@ -1,5 +1,7 @@
 #pragma once Scorecard.hpp
 
+#include "Dice.hpp"
+
 class Scorecard
 {
 private:
@@ -16,7 +18,9 @@ public:
     // TODO: Display scoreboard
     // TODO:    Scoreboard based on roll
     // TODO:    Current scoreboard
-    //  TODO:
+    //      TODO:   Calculate Score per Category
+    int sumDice(Dice& hand, int sumOn);
+    //      TODO:   Display Score in Scoreboard
     // TODO:    Final (or current total) Score
     int getTotalScore();
 };

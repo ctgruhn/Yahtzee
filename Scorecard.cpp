@@ -19,3 +19,14 @@ int Scorecard::getTotalScore()
     }
     return sum;
 }
+
+int Scorecard::sumDice(Dice& hand, int sumOn)
+{
+  int sum = 0;
+    for(int i = 0; i < hand.getSize(); i++)
+  {
+    if(hand.getDice(i) == sumOn)
+      sum += hand.getDice(i);
+  }
+  return sum;
+}
