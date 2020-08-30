@@ -30,3 +30,29 @@ int Scorecard::sumDice(Dice& hand, int sumOn)
   }
   return sum;
 }
+
+bool Scorecard::numPairs(Dice& hand, int numUnique, int pairNum)
+{
+    int pairs = 0;
+    int unique = hand.getSize();
+    int curVal = hand.getDice(0);
+    int prevVal = -1;
+
+    for (int i = 1; i < hand.getSize(); i++)
+    {
+        if (hand.getDice(i) == curVal)
+        {
+            if(curVal != prevVal)
+                pairs++;
+            unique --;
+            prevVal = curVal;
+        }
+        else
+        {
+            curVal = hand.getDice(i);
+        }
+
+    }
+    return (numUnique == unique && pairNum == pairs);
+}
+

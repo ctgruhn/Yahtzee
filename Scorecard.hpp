@@ -1,4 +1,4 @@
-#pragma once Scorecard.hpp
+#pragma once
 
 #include "Dice.hpp"
 
@@ -20,6 +20,7 @@ public:
     // TODO:    Current scoreboard
     //      TODO:   Calculate Score per Category
     int sumDice(Dice& hand, int sumOn);
+    bool numPairs(Dice& hand, int numUnique, int pairNum); // TODO: Tie
     //      TODO:   Display Score in Scoreboard
     // TODO:    Final (or current total) Score
     int getTotalScore();
