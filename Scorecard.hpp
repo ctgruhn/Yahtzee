@@ -11,6 +11,11 @@ private:
     enum lock {Open, Closed};
     enum scoreRow {Score, Lock};
     
+    const int fullHouse = 25;
+    const int smStraight = 30;
+    const int lgStraight = 40;
+    const int yahtzee = 50;
+
     int score [2] [13];     // First row contains scores, second row contains binary lock values
 public:
     // TODO: Reset scores
