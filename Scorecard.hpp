@@ -25,11 +25,19 @@ public:
     // TODO:    Current scoreboard
     //      TODO:   Calculate Score per Category
     int sumDice(Dice& hand, int sumOn);
+    int sumDice(Dice& hand);
+
     bool numPairs(Dice& hand, int numUnique, int pairNum); // TODO: Tie TOAK, FOAK, and FullHouse together
+    
     bool isThreeOfAKind (Dice& hand) {return numPairs(hand, 3, 1);}
     bool isFourOfAKind (Dice& hand) {return numPairs(hand, 2, 1);}
     bool isFullHouse (Dice& hand) {return numPairs(hand, 2, 2);}
     bool isYahtzee (Dice& hand) {return numPairs(hand, 1, 1);}
+    
+    bool isSmStraight (Dice& hand);
+    bool isLgStraight (Dice& hand);
+    
+    void calScore (Dice& hand);
     //      TODO:   Display Score in Scoreboard
     // TODO:    Final (or current total) Score
     int getTotalScore();
