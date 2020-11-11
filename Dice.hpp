@@ -12,6 +12,8 @@ public:
     const int getVal() {return val;}
     void setVal (int v){val = v;}
     void roll(){ val = rand() % 6 + 1;};
+    
+    friend bool operator<(Die const &die1, Die const &die2);
 };
 
 
@@ -25,6 +27,9 @@ public:
     void roll();
     int getSize() { return HAND_SIZE;}
     int getDice(int die) {return hand[die].getVal();}
+    
+    void sort();
+    
     void printHand();
     void setHand(int die1, int die2, int die3, int die4, int die5);
 };
