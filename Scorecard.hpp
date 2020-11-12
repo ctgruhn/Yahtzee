@@ -5,7 +5,7 @@
 class Scorecard
 {
 private:
-    int catSize = 13;
+    static const int numOfCategories = 13;
     enum categories {Aces, Twos, Threes, Fours, Fives, Sixes, ThreeOfAKind, 
             FoursOfAKind, FullHouse, SmallStraight, LargeStraight, Yahtzee, Chance};
     enum lock {Open, Closed};
@@ -16,7 +16,7 @@ private:
     const int lgStraight = 40;
     const int yahtzee = 50;
 
-    int score [2] [13];     // First row contains scores, second row contains binary lock values
+    int score [2] [numOfCategories];     // First row contains scores, second row contains binary lock values
 public:
     // TODO: Reset scores
     void reset();
@@ -38,7 +38,9 @@ public:
     bool isLgStraight (Dice& hand);
     
     void calScore (Dice& hand);
+    bool setScore (int Category);
     //      TODO:   Display Score in Scoreboard
     // TODO:    Final (or current total) Score
     int getTotalScore();
 };
+

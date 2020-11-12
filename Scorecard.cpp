@@ -149,3 +149,17 @@ void Scorecard::calScore(Dice& hand)
             score[1][Yahtzee] = 0;
     }
 
+bool Scorecard::setScore(int Category)
+{
+  if(score[0][Category - 1] > 0)
+  {
+
+      std::cout << "\nThat Category has already been selected." << std::endl;
+      return false;
+  }
+  else
+  {
+      score[0][Category - 1] = 1;
+      return true;
+  }
+}
