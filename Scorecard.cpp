@@ -1,8 +1,9 @@
 #include "Scorecard.hpp"
+#include <iomanip>
 
 void Scorecard::reset()
 {
-    for (int i = 0; i < catSize; i++)
+    for (int i = 0; i < numOfCategories; i++)
     {
         score[0][i] = 0;        // Set score in each category to 0
         score[1][i] = 0;        // Set lock value to 0
@@ -12,7 +13,7 @@ void Scorecard::reset()
 int Scorecard::getTotalScore()
 {
     int sum = 0;
-    for (int i = 0; i < catSize; i++)
+    for (int i = 0; i < numOfCategories; i++)
     {
         if (score[Lock][i] == Open)
             sum += score[Score][i];
@@ -39,6 +40,17 @@ int Scorecard::sumDice(Dice& hand, int sumOn)
       sum += hand.getDice(i);
   }
   return sum;
+}
+
+int Scorecard::scoreTotal()
+{
+    int sum = 0;
+    for(int index = 0; index < numOfCategories; index++)
+    {
+        if(score[0][index] == Closed)
+            sum += score[1][index];
+    }
+    return sum;
 }
 
 
@@ -107,51 +119,51 @@ void Scorecard::calScore(Dice& hand)
         // For all categories not already selected, sum on
         for(int catIndex = Aces; catIndex < ThreeOfAKind; catIndex++)
         {
-            if(score[0][catIndex] == Open)
-                score[1][catIndex] = sumDice(hand, catIndex + 1);
+            if(score[Lock][catIndex] == Open)
+                score[Score][catIndex] = sumDice(hand, catIndex + 1);
         }
-        if(score[0][Chance] == Open)
-            score[1][Chance] = sum;
-        if (score[0][ThreeOfAKind] == Open)
+        if(score[Lock][Chance] == Open)
+            score[Score][Chance] = sum;
+        if (score[Lock][ThreeOfAKind] == Open)
         {
             if(isThreeOfAKind(hand))
-                score[1][ThreeOfAKind] = sum;
+                score[Score][ThreeOfAKind] = sum;
             else
-                score[1][ThreeOfAKind] = 0;
+                score[Score][ThreeOfAKind] = 0;
         }
-        if(score[0][FoursOfAKind] == Open)
+        if(score[Lock][FoursOfAKind] == Open)
         {
             if(isFourOfAKind(hand))
-                score[1][FoursOfAKind] = sum;
+                score[Score][FoursOfAKind] = sum;
             else
-                score[1][FoursOfAKind] = 0;
+                score[Score][FoursOfAKind] = 0;
         }
-        if(score[0][FullHouse] == Open)
+        if(score[Lock][FullHouse] == Open)
         {
             if(isFullHouse(hand))
-               score[1][FullHouse] = fullHouse;
+               score[Score][FullHouse] = fullHouse;
             else
-               score[1][FullHouse] = 0;
+               score[Score][FullHouse] = 0;
         }
-        if(isSmStraight(hand) && score[0][SmallStraight] == Open)
+        if(isSmStraight(hand) && score[Lock][SmallStraight] == Open)
             score[1][SmallStraight] = smStraight;
-        if(isLgStraight(hand) && score[0][LargeStraight] == Open)
-            score[1][LargeStraight] = lgStraight;
-        if(score[0][Yahtzee] == Open)
+        if(isLgStraight(hand) && score[Lock][LargeStraight] == Open)
+            score[Score][LargeStraight] = lgStraight;
+        if(score[Lock][Yahtzee] == Open)
         {
             if(isYahtzee(hand))
-               score[1][Yahtzee] = yahtzee;
+               score[Score][Yahtzee] = yahtzee;
             else
-               score[1][Yahtzee] = 0;
+               score[Score][Yahtzee] = 0;
 
         }
-        else if (score[0][Yahtzee] == Open)
-            score[1][Yahtzee] = 0;
+        else if (score[Lock][Yahtzee] == Open)
+            score[Score][Yahtzee] = 0;
     }
 
 bool Scorecard::setScore(int Category)
 {
-  if(score[0][Category - 1] > 0)
+  if(score[Lock][Category - 1] > 0)
   {
 
       std::cout << "\nThat Category has already been selected." << std::endl;
@@ -159,7 +171,54 @@ bool Scorecard::setScore(int Category)
   }
   else
   {
-      score[0][Category - 1] = 1;
+      score[Lock][Category - 1] = 1;
       return true;
   }
+}
+
+
+std::string Scorecard::getStringScore(categories cat, lock l)
+{
+    if (score[Lock][cat] == l) {
+        return std::to_string(score[Score][cat]);
+    }
+    else
+        return "X";
+}
+
+
+void Scorecard::displayScoreCard(lock l)
+{
+  std::cout << std::right
+            << "==============================================================================\n"
+            << "|    | Category | Category | Category | Category | Category | Category |     |\n"
+            << "|    |     1    |     2    |     3    |     4    |     5    |     6    |     |\n"
+            << "|    |----------|----------|----------|----------|----------|----------|     |\n"
+            << "|    |   Aces   |   Twos   |  Threes  |   Fours  |   Fives  |   Sixes  |     |\n"
+            << "|    |----------|----------|----------|----------|----------|----------|     |\n"
+            << "|    |" << std::setw(6) << getStringScore(Aces, l) << std::setw(5) << "|"
+                   << std::setw(6) << getStringScore(Twos, l) << std::setw(5) << "|"
+                   << std::setw(6) << getStringScore(Threes, l) << std::setw(5) << "|"
+                   << std::setw(6) << getStringScore(Fours, l) << std::setw(5) << "|"
+                   << std::setw(6) << getStringScore(Fives, l) << std::setw(5) << "|"
+                   << std::setw(6) << getStringScore(Sixes, l) << std::setw(5) << "|" << "     |\n"
+    << "==============================================================================\n"
+    << "| Category | Category | Category | Category | Category | Category | Category |\n"
+    << "|     7    |     8    |     9    |    10    |    11    |    12    |    13    |\n"
+    << "|----------|----------|----------|----------|----------|----------|----------|\n"
+    << "|          | Three of |  Four of |          |   Small  |  Large   |          |\n"
+    << "|  Chance  |  a kind  |  a kind  |Full House| Straight | Straight |  Yahtzee |\n"
+    << "|----------|----------|----------|----------|----------|----------|----------|\n"
+    << "|" << std::setw(6) << getStringScore(Chance, l) << std::setw(5) << "|"
+           << std::setw(6) << getStringScore(ThreeOfAKind, l) << std::setw(5) << "|"
+           << std::setw(6) << getStringScore(FoursOfAKind, l) << std::setw(5) << "|"
+           << std::setw(6) << getStringScore(FullHouse, l) << std::setw(5) << "|"
+           << std::setw(6) << getStringScore(SmallStraight, l) << std::setw(5) << "|"
+    << std::setw(6) << getStringScore(LargeStraight, l) << std::setw(5) << "|"
+           << std::setw(6) << getStringScore(Yahtzee, l) << std::setw(5) << "|" << "\n"
+    << "==============================================================================\n"
+    << "|" << std::setw(38) << "TOTAL SCORE:" << std::setw(10) << scoreTotal() << std::setw(30) << "|\n"
+    << "==============================================================================\n"
+    << std::endl;
+
 }

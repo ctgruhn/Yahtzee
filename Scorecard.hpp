@@ -8,8 +8,7 @@ private:
     static const int numOfCategories = 13;
     enum categories {Aces, Twos, Threes, Fours, Fives, Sixes, ThreeOfAKind, 
             FoursOfAKind, FullHouse, SmallStraight, LargeStraight, Yahtzee, Chance};
-    enum lock {Open, Closed};
-    enum scoreRow {Score, Lock};
+
     
     const int fullHouse = 25;
     const int smStraight = 30;
@@ -18,6 +17,8 @@ private:
 
     int score [2] [numOfCategories];     // First row contains scores, second row contains binary lock values
 public:
+    enum lock {Open, Closed};
+    enum scoreRow {Score, Lock};
     // TODO: Reset scores
     void reset();
     // TODO: Display scoreboard
@@ -39,7 +40,11 @@ public:
     
     void calScore (Dice& hand);
     bool setScore (int Category);
+    int scoreTotal();
     //      TODO:   Display Score in Scoreboard
+    std::string getStringScore(categories cat, lock l);
+    void displayScoreCard(lock l);
+
     // TODO:    Final (or current total) Score
     int getTotalScore();
 };
