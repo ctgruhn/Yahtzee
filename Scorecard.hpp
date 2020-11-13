@@ -6,8 +6,8 @@ class Scorecard
 {
 private:
     static const int numOfCategories = 13;
-    enum categories {Aces, Twos, Threes, Fours, Fives, Sixes, ThreeOfAKind, 
-            FoursOfAKind, FullHouse, SmallStraight, LargeStraight, Yahtzee, Chance};
+    enum categories {Aces, Twos, Threes, Fours, Fives, Sixes, Chance, ThreeOfAKind, 
+            FoursOfAKind, FullHouse, SmallStraight, LargeStraight, Yahtzee};
 
     
     const int fullHouse = 25;
@@ -42,6 +42,7 @@ public:
     bool setScore (int Category);
     int scoreTotal();
     //      TODO:   Display Score in Scoreboard
+    void displayCategories();
     std::string getStringScore(categories cat, lock l);
     void displayScoreCard(lock l);
 
