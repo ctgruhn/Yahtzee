@@ -37,6 +37,7 @@ void Game::play()
         score.displayScoreCard(score.Open);
         
         // Display dice
+        hand.getDiceModels();
         hand.printHand();
     
     //  Loops for user input until a valid category is chosen or until user quits game
