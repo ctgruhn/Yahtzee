@@ -27,9 +27,9 @@ public:
     void roll();
     int getSize() { return HAND_SIZE;}
     int getDice(int die) {return hand[die].getVal();}
-    
+    void getDiceModels();
+
     void sort();
-    
     void printHand();
     void setHand(int die1, int die2, int die3, int die4, int die5);
 };
