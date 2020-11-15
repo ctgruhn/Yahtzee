@@ -186,6 +186,15 @@ std::string Scorecard::getStringScore(categories cat, lock l)
         return "X";
 }
 
+void Scorecard::displayCategories()
+{
+    std::cout << "\nCategory Numbers:\n"
+              << std::left << std::setw(15) << "\t1. Aces" << std::setw(15) << "4. Fours" << std::setw(25) << "7. Chance" << std::setw(20) << "10. Full House" << "13. Yahtzee" << "\n"
+              << std::setw(15) << "\t2. Twos" << std::setw(15) << "5. Fives" << std::setw(25) << "8. Three of a Kind" << "11. Sm Straight" << "\n"
+    << std::setw(15) << "\t3. Threes" << std::setw(15) << "6. Sixes" << std::setw(25) << "9. Four of a Kind" << "12. Lg Straight" << "\n" << std::endl;
+
+}
+
 
 void Scorecard::displayScoreCard(lock l)
 {
